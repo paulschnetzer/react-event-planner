@@ -1,39 +1,34 @@
-import React, { useState, useRef, useEffect } from 'react';
-import RenderTodos from './RenderTodos';
+import React, { useState, useRef } from 'react';
+import RenderGuest from './renderGuest';
 let idNumber = 0;
 //hello world
 // const LOCAL_STORAGE_KEY = 'todosApp.todos';
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  const [guestArray, setGuestArray] = useState([]);
   const FirstNameRef = useRef();
   const SecondNameRef = useRef();
 
-  function toggleTodo(id) {
-    const newTodos = [...todos];
-    const todo = newTodos.find((todo) => todo.id === id);
-    todo.complete = !todo.complete;
-    setTodos(newTodos);
-  }
-
-  function handleAddTodo(e) {
+  function handleAddGuest(e) {
     const firstName = FirstNameRef.current.value;
     const secondName = SecondNameRef.current.value;
-    setTodos((prevTodos) => {
+    setGuestArray((newGuest) => {
       return [
-        ...prevTodos,
+        ...newGuest,
         {
           id: idNumber++,
           name: firstName,
           secondname: secondName,
-          complete: false,
+          status: false,
         },
       ];
     });
   }
-  function handleClearTodos() {
-    const newTodos = todos.filter((todo) => !todo.complete);
-    setTodos(newTodos);
+  function attending(id) {
+    const newGuestArray = [...guestArray];
+    const guest = newGuestArray.find((guest) => guest.id === id);
+    guest.status = !guest.status;
+    setGuestArray(newGuestArray);
   }
 
   return (
@@ -41,10 +36,12 @@ function App() {
       <input ref={FirstNameRef} type="text" />
       <input ref={SecondNameRef} type="text" />
 
-      <button onClick={handleAddTodo}>Add Todo</button>
-      <button onClick={handleClearTodos}>Clear Completed</button>
-
-      <RenderTodos todos={todos} toggleTodo={toggleTodo} />
+      <button onClick={handleAddGuest}>Add Guest</button>
+      <RenderGuest
+        guestArray={guestArray}
+        attending={attending}
+        setGuestArray={setGuestArray}
+      />
     </>
   );
 }
