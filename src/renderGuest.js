@@ -3,7 +3,7 @@ import React from 'react';
 export default function RenderGuest({ guestArray, attending, setGuestArray }) {
   return guestArray.map((guest) => {
     return (
-      <div>
+      <div key={guest.id}>
         <label>
           <input
             type="checkbox"

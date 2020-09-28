@@ -9,7 +9,7 @@ function App() {
   const FirstNameRef = useRef();
   const SecondNameRef = useRef();
 
-  function handleAddGuest(e) {
+  function handleAddGuest() {
     const firstName = FirstNameRef.current.value;
     const secondName = SecondNameRef.current.value;
     setGuestArray((newGuest) => {
@@ -33,8 +33,8 @@ function App() {
 
   return (
     <>
-      <input ref={FirstNameRef} type="text" />
-      <input ref={SecondNameRef} type="text" />
+      <input ref={FirstNameRef} type="text" placeholder="First Name" />
+      <input ref={SecondNameRef} type="text" placeholder="Second Name" />
 
       <button onClick={handleAddGuest}>Add Guest</button>
       <RenderGuest
